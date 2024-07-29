@@ -23,7 +23,7 @@ class LoginController extends Controller
         $credentials= $request->only($this->requestLogin);
         $checkData = Auth::attempt($credentials);
         if(!$checkData){
-                return response()->json(['faild'=> 'Check Your credentials']);
+                return response()->json(['faild'=> 'Check Your credentials'],400);
         }else{
           $user =  $this->user->where('email', $credentials['email'])->first();
            $token = $user->createToken('personal access Tokens')->plainTextToken;
@@ -31,6 +31,7 @@ class LoginController extends Controller
             return response()->json([
                 'success'=>'Login Successfully',
                 '_token'=>$token,
+                'detailes'=>$user,
             ]);
         }
         
