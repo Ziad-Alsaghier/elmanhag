@@ -13,11 +13,14 @@ class SubjectsController extends Controller
     public function subjects( Request $request ){
         $subjects = subject::whereHas('users', function ($query) {
             $query->where('id', $request->user()->id);
-        })->get();
+        })
+        ->where('expired_date', '>=', now())
+        ->get();
         
         $bundels = bundle::whereHas('users', function ($query) {
             $query->where('id', $request->user()->id);
         })
+        ->where('expired_date', '>=', now())
         ->with('subjects')
         ->get();
 
