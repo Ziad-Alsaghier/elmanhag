@@ -8,7 +8,9 @@ use App\Http\Controllers\api\v1\auth\LoginController;
 use App\Http\Controllers\api\v1\auth\SignupController;
 
 use App\Http\Controllers\api\v1\admin\ProfileAdminController;
+
 use App\Http\Controllers\api\v1\student\SubjectsController;
+use App\Http\Controllers\api\v1\student\ProfileController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -17,7 +19,11 @@ Route::get('/user', function (Request $request) {
 
 Route::middleware(['student', 'auth.sanctum'])->prefix('Student')->group(function () {
     Route::controller(SubjectsController::class)->prefix('Subjects')->group(function () {
-        Route::get('/','Subjects')->name('Subjects');
+        Route::get('/','subjects')->name('stu_subjects');
+    });
+    
+    Route::controller(SubjectsController::class)->prefix('Profile')->group(function () {
+        Route::get('/','index')->name('stu_profile');
     });
 });
 

@@ -16,14 +16,19 @@ class SignupController extends Controller
 {
 
     protected $requestSignup = ['firstName','lastName', 'email', 'password',
-    'parent_name', 'parent_phone', 'phone', 'city_id', 'country_id', 'category_id'];
+    'parent_name', 'parent_phone', 'phone', 'city_id', 'country_id', 'category_id', 'language'];
     // Sign up Page
 
     public function  signup(){
-        $countries = country::all();
-        $cities = city::all();
+        $countries = country::
+        where('status', '1')
+        ->get();
+        $cities = city::
+        where('status', '1')
+        ->get();
         $categories = category::
         where('category_id', '!=', null)
+        ->where('status', '1')
         ->get();
 
         return response()->json([
