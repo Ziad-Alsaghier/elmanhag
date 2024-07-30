@@ -5,26 +5,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\v1\auth\LoginController;
 use App\Http\Controllers\api\v1\admin\ProfileAdminController;
-
 use App\Http\Controllers\api\v1\student\SubjectsController;
-
-use App\Http\Middleware\StudentMiddleware;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
 
-Route::middleware([StudentMiddleware::class, 'auth.sanctum'])->prefix('Student')->group(function () {
+Route::middleware(['student', 'auth.sanctum'])->prefix('Student')->group(function () {
     Route::controller(SubjectsController::class)->prefix('Subjects')->group(function () {
-        Route::get('/','subjects')->name('stu_subjects');
+        Route::get('/','Subjects')->name('Subjects');
     });
 });
 
 Route::controller(LoginController::class)->prefix('admin')->group(function () {
     Route::post('auth/login','login')->name('login');
-    Route::get('auth/signup','signup')->name('signup');
-    Route::post('auth/signup_proccess','signup_proccess')->name('signup_proccess');
     Route::post('auth/logout','logout')->name('user.logout')->middleware('auth:sanctum');
 });
 Route::controller(ProfileAdminController::class)->prefix('admin')->group(function () {
