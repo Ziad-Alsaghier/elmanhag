@@ -43,7 +43,7 @@ class SignupController extends Controller
     public function signup_proccess(SignupRequest $request){
         $requestSignup['type'] = 'student';
         $data= $request->only($this->requestSignup);
-        User::create($data);
+        $user = User::create($data);
 
         $token = $user->createToken('personal access Tokens')->plainTextToken;
         return response()->json([
