@@ -15,8 +15,11 @@ class StudentMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ( auth()->user()->type == 'student' ) {
-            return $next($request);
+        if(auth()->user()->type){
+            if ( auth()->user()->type == 'student' ) {
+                    return $next($request);
+                }
         }
+        
     }
 }
