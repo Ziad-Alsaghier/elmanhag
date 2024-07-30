@@ -8,18 +8,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
-use App\Models\country;
-use App\Models\city;
-use App\Models\category;
 
 use App\Http\Requests\api\auth\LoginRequest;
-use App\Http\Requests\api\auth\SignupRequest;
 
 class LoginController extends Controller
 {
     protected $requestLogin = ['email','password'];
-    protected $requestSignup = ['firstName','lastName', 'email', 'password',
-    'parent_name', 'parent_phone', 'phone', 'city_id', 'country_id', 'category_id'];
+    
     public function __construct(
         private User $user 
     ){

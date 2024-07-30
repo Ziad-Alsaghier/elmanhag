@@ -5,9 +5,18 @@ namespace App\Http\Controllers\api\v1\auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\country;
+use App\Models\city;
+use App\Models\category;
+use App\Models\User;
+
+use App\Http\Requests\api\auth\SignupRequest;
+
 class SignupController extends Controller
 {
 
+    protected $requestSignup = ['firstName','lastName', 'email', 'password',
+    'parent_name', 'parent_phone', 'phone', 'city_id', 'country_id', 'category_id'];
     // Sign up Page
 
     public function  signup(){
