@@ -10,7 +10,7 @@ use App\Http\Controllers\api\v1\auth\SignupController;
 use App\Http\Controllers\api\v1\admin\ProfileAdminController;
 
 use App\Http\Controllers\api\v1\student\SubjectsController;
-use App\Http\Controllers\api\v1\student\ProfileController;
+use App\Http\Controllers\api\v1\student\ProfileController as ProfileStudentController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -22,8 +22,9 @@ Route::middleware(['student', 'auth.sanctum'])->prefix('Student')->group(functio
         Route::get('/','subjects')->name('stu_subjects');
     });
     
-    Route::controller(SubjectsController::class)->prefix('Profile')->group(function () {
+    Route::controller(ProfileStudentController::class)->prefix('Profile')->group(function () {
         Route::get('/','index')->name('stu_profile');
+        Route::post('/Update','update_profile')->name('stu_update_profile');
     });
 });
 
