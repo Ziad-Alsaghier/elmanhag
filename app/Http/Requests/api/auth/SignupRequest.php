@@ -25,14 +25,14 @@ class SignupRequest extends FormRequest
             'firstName' => ['required'],
             'lastName' => ['required'],
             'email' => ['email', 'unique:users', 'required'],
-            'password' => ['required'],
-            'conf_password' => ['required', 'same:password'],
-            'parent_name' => ['required'],
-            'parent_phone' => ['required'],
-            'phone' => ['required', 'unique:users'],
-            'city_id' => ['required'],
-            'country_id' => ['required'],
-            'category_id' => ['required'],
+            // 'password' => ['required'],
+            // 'conf_password' => ['required', 'same:password'],
+            // 'parent_name' => ['required'],
+            // 'parent_phone' => ['required'],
+            // 'phone' => ['required', 'unique:users'],
+            // 'city_id' => ['required'],
+            // 'country_id' => ['required'],
+            // 'category_id' => ['required'],
         ];
     }
 
