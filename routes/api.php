@@ -18,7 +18,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::middleware(['auth.sanctum'])->prefix('Student')->group(function () {
+Route::middleware(['auth:sanctum'])->prefix('Student')->group(function () {
     Route::controller(SubjectsController::class)->prefix('Subjects')->group(function () {
         Route::get('/','subjects')->name('stu_subjects');
     });
