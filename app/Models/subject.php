@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\User;
+
 class subject extends Model
 {
     use HasFactory;
@@ -17,4 +19,8 @@ class subject extends Model
         'discount_type' ,
         'expired_date' ,
     ];
+
+    public function users(){
+        return belongsToMany(User::class, 'students_subjects');
+    }
 }

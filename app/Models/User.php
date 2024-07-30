@@ -8,6 +8,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Models\subject;
+use App\Models\bundle;
+
 class User extends Authenticatable
 {
     use HasApiTokens,HasFactory, Notifiable;
@@ -29,6 +32,10 @@ class User extends Authenticatable
         'city_id',
         'student_id',
         'remember_token',
+        'parent_name',
+        'parent_phone',
+        'category_id',
+        'language'
     ];
 
     /**
@@ -53,20 +60,31 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-     public function getImageUrl (){
-     if($this->image){
-     return $this->image = url('storage/app/public/'.$this->image);
-     }
-     return 'C:\xampp\tmp'.$this->name;
-     }
-        public function country(){
-        return $this->belongsTo(country::class);
-        }
-        public function city(){
-        return $this->belongsTo(city::class);
-        }
-       public function getimageAttribute($date){
-           return $this->image = url('storage/app/public/'.$date);
 
-       }
+    public function getImageUrl (){
+        if($this->image){
+            return $this->image = url('storage/app/public/'.$this->image);
+        }
+        return 'C:\xampp\tmp'.$this->name;
+    }
+
+    public function country(){
+        return $this->belongsTo(country::class);
+    }
+
+    public function city(){
+        return $this->belongsTo(city::class);
+    }
+
+    public function getimageAttribute($date){
+        return $this->image = url('storage/app/public/'.$date);
+    }
+
+    public function subjects(){
+        return belongsToMany(subject::class, 'students_subjects');
+    }
+
+    public function bundels(){
+        return belongsToMany(bundle::class, 'students_bundles');
+    }
 }

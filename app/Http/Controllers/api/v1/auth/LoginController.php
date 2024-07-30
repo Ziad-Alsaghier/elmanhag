@@ -3,15 +3,23 @@
 namespace App\Http\Controllers\api\v1\auth;
 
 use Exception;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+
+use App\Models\User;
+use App\Models\country;
+use App\Models\city;
+use App\Models\category;
+
 use App\Http\Requests\api\auth\LoginRequest;
+use App\Http\Requests\api\auth\SignupRequest;
 
 class LoginController extends Controller
 {
     protected $requestLogin = ['email','password'];
+    protected $requestSignup = ['firstName','lastName', 'email', 'password',
+    'parent_name', 'parent_phone', 'phone', 'city_id', 'country_id', 'category_id'];
     public function __construct(
         private User $user 
     ){
@@ -37,6 +45,36 @@ class LoginController extends Controller
         
     }
 
+    // Sign up Page
+
+    public function  signup(){
+        $countries = country::all();
+        $cities = city::all();
+        $categories = category::
+        where('category_id', '!=', null)
+        ->get();
+
+        return response()->json([
+            'countries' => $countries,
+            'cities' => $cities,
+            'categories' => $categories,
+        ]);
+    }
+
+    // Sign up Student Proccessing
+
+    public function signup_proccess(SignupRequest $request){
+        $data= $request->only($this->requestSignup);
+        User::create($data);
+
+        $token = $user->createToken('personal access Tokens')->plainTextToken;
+        return response()->json([
+            'success'=>'Sign Up Successfully',
+            '_token'=>$token,
+            'detailes'=>$data,
+        ]);
+        
+    }
 
     public function logout(Request $request)
     {

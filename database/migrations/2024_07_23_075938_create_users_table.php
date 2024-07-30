@@ -19,6 +19,10 @@ return new class extends Migration
             $table->enum('type',['supAdmin','admin','teacher','parent','student','affiliate']);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('parent_name');
+            $table->string('parent_phone');
+            $table->integer('category_id');
+            $table->boolean('language');
             $table->string('password');
             $table->foreignId('country_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('city_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
