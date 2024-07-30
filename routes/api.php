@@ -17,12 +17,14 @@ Route::get('/user', function (Request $request) {
 
 Route::middleware([StudentMiddleware::class, 'auth.sanctum'])->prefix('Student')->group(function () {
     Route::controller(SubjectsController::class)->prefix('Subjects')->group(function () {
-        Route::get('/','Subjects')->name('Subjects');
+        Route::get('/','subjects')->name('stu_subjects');
     });
 });
 
 Route::controller(LoginController::class)->prefix('admin')->group(function () {
     Route::post('auth/login','login')->name('login');
+    Route::get('auth/signup','signup')->name('signup');
+    Route::post('auth/signup_proccess','signup_proccess')->name('signup_proccess');
     Route::post('auth/logout','logout')->name('user.logout')->middleware('auth:sanctum');
 });
 Route::controller(ProfileAdminController::class)->prefix('admin')->group(function () {
