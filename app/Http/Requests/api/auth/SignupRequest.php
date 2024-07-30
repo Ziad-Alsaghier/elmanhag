@@ -37,10 +37,10 @@ class SignupRequest extends FormRequest
     }
 
 
-    public function failedValidation(Validator $validator){
-         throw new HttpResponseException(response()->json([
-                 'message'=>'validation error',
-                 'errors'=>$validator->errors(),
-         ],400));
-     }
+    // public function failedValidation(Validator $validator){
+    //      throw new HttpResponseException(response()->json([
+    //              'message'=>'validation error',
+    //              'errors'=>$validator->errors(),
+    //      ],400));
+    //  }
 }
