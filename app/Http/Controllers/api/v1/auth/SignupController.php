@@ -40,7 +40,8 @@ class SignupController extends Controller
 
     // Sign up Student Proccessing
 
-    public function signup_proccess(SignupRequest $request){
+    public function signup_proccess(){
+        return 123;
         $requestSignup['type'] = 'student';
         $data= $request->only($this->requestSignup);
         User::create($data);
