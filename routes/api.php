@@ -12,12 +12,13 @@ use App\Http\Controllers\api\v1\admin\ProfileAdminController;
 use App\Http\Controllers\api\v1\student\SubjectsController;
 use App\Http\Controllers\api\v1\student\ProfileController as ProfileStudentController;
 
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
 
-Route::middleware(['student', 'auth.sanctum'])->prefix('Student')->group(function () {
+Route::middleware('auth:sanctum')->prefix('Student')->group(function () {
     Route::controller(SubjectsController::class)->prefix('Subjects')->group(function () {
         Route::get('/','subjects')->name('stu_subjects');
     });
