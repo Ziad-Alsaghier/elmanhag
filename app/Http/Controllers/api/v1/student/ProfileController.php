@@ -18,9 +18,10 @@ class ProfileController extends Controller
     'country_id', 'city_id', 'phone', 'parent_name', 'parent_phone'];
 
     public function index( Request $request ){
-      
-        $user_data = $request->user();
 
+        $user_data = $request->user()
+            ->with('city')->with('country')->first();
+            
         return response()->json([
             'user_data' => $user_data,
         ]);
