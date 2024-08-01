@@ -39,5 +39,13 @@ class CreateStudentController extends Controller
        $user = $this->user->create($newStudent); // Start Create New Studetn
         return response()->json(['success'=>'Student Created Successfully'],200); 
     }
+    
+    public function modify(StudentRequest $request, $id){
+        $student =  $request->only($this->studentRequest); // Take only Request From Protected studentRequest names 
+       $image =  $this->upload($request,'image','admin/student'); // Start Upload Image
+        $student['image'] =$image; // Image Value From traid Image 
+       User::where('id', $id)->update($student); // Start Create New Studetn
+        return response()->json(['success'=>'Student Updated Successfully'],200); 
+    }
    
 }

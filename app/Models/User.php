@@ -10,6 +10,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Models\subject;
 use App\Models\bundle;
+use App\Models\category;
+use App\Models\country;
+use App\Models\city;
 
 class User extends Authenticatable
 {
@@ -89,4 +92,9 @@ class User extends Authenticatable
     public function bundels(){
         return belongsToMany(bundle::class, 'students_bundles');
     }
+
+    public function category(){
+        return belongsTo(category::class, 'category_id');
+    }
+
 }
