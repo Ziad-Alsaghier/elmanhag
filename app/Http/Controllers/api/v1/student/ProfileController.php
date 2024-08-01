@@ -18,22 +18,10 @@ class ProfileController extends Controller
     'country_id', 'city_id', 'phone', 'parent_name', 'parent_phone'];
 
     public function index( Request $request ){
-        $countries = country::
-        where('status', '1')
-        ->get();
-        $cities = city::
-        where('status', '1')
-        ->get();
-        $categories = category::
-        where('category_id', '!=', null)
-        ->where('status', '1')
-        ->get();
-        $user_data = auth()->user();
+      
+        $user_data = $request->user();
 
         return response()->json([
-            'countries' => $countries,
-            'cities' => $cities,
-            'categories' => $categories,
             'user_data' => $user_data,
         ]);
     }
