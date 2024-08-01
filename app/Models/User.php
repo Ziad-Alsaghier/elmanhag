@@ -37,6 +37,7 @@ class User extends Authenticatable
         'category_id',
         'language',
         'image',
+        'status',
     ];
 
     /**
