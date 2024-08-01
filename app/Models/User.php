@@ -36,6 +36,7 @@ class User extends Authenticatable
         'parent_phone',
         'category_id',
         'language',
+        'image',
         'status',
     ];
 

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->string('phone');
+            $table->string('image');
             $table->enum('type',['supAdmin','admin','teacher','parent','student','affiliate']);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -24,8 +25,8 @@ return new class extends Migration
             $table->integer('category_id');
             $table->boolean('language');
             $table->string('password');
-            $table->foreignId('country_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('city_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('country_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('city_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('student_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('status')->default(1);
             $table->rememberToken();
