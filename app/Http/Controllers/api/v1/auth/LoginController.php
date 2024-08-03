@@ -24,7 +24,7 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request){
         $credentials= $request->only($this->requestLogin);
-        $user_position = User::where('email', $request)
+        $user_position = User::where('email', $request->email)
         ->first();
         if ( !empty($user_position) && ($user_position->type == 'admin' || $user_position->type == 'supAdmin') ) {
             
@@ -51,7 +51,7 @@ class LoginController extends Controller
 
     public function user_login(LoginRequest $request){
         $credentials= $request->only($this->requestLogin);
-        $user_position = User::where('email', $request)
+        $user_position = User::where('email', $request->email)
         ->first();
         if ( !empty($user_position) && ($user_position->type != 'admin' && $user_position->type != 'supAdmin') ) {
             
