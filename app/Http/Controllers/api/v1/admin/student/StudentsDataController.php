@@ -11,7 +11,7 @@ class StudentsDataController extends Controller
     public function show(){
         $students = User::where('type', 'student')
         ->with('subjects')
-        ->with('bundels')
+        ->with('bundles')
         ->with('category')
         ->with('country')
         ->with('city')
@@ -19,7 +19,7 @@ class StudentsDataController extends Controller
         $total_students = count($students);
         $banned_students = count($students->where('status', 0));
         $paid_students = User::where('type', 'student')
-        ->whereHas('bundels')
+        ->whereHas('bundles')
         ->orWhere('type', 'student')
         ->whereHas('subjects')
         ->count();
