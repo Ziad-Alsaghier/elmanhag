@@ -11,7 +11,7 @@ class UpdateStudentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,19 @@ class UpdateStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            // this request from admin for Update Student
+            'firstName'=>['required'],
+            'lastName'=>['required'],
+            'phone'=>['required'],
+            'email'=>['required'],
+            'parent_name'=>['required'],
+            'parent_phone'=>['required'],
+            'category_id'=>['required'],
+            'language'=>['required'],
+            'password'=>['required'],
+            'conf_password'=>['required', 'same:password'],
+            'country_id'=>['required'],
+            'city_id'=>['required'],
         ];
     }
 }
