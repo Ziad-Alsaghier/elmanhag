@@ -12,7 +12,8 @@ class CategoryController extends Controller
     public function show(){
         // Category data with parent
         $categories = category::
-        with('parent_category')
+        where('category_id', '!=', null)
+        ->with('parent_category')
         ->get();
 
         return response()->json([
