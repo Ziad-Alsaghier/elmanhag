@@ -20,12 +20,8 @@ trait image
     
     public function deleteImage($imagePath){
         // Check if the file exists
-        if (Storage::exists($imagePath)) {
-            // Delete the file
-            Storage::delete($imagePath);
-            return true;
-        } else {
-            return false;
+        if ($imagePath && Storage::disk('public')->exists($imagePath)) {
+            Storage::disk('public')->delete($imagePath);
         }
     }
     
