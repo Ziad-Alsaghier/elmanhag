@@ -86,15 +86,15 @@ class User extends Authenticatable
     }
 
     public function subjects(){
-        return belongsToMany(subject::class, 'students_subjects');
+        return $this->belongsToMany(subject::class, 'students_subjects');
     }
 
-    public function bundels(){
-        return belongsToMany(bundle::class, 'students_bundles');
+    public function bundles(){
+        return $this->belongsToMany(bundle::class, 'students_bundles');
     }
 
     public function category(){
-        return belongsTo(category::class, 'category_id');
+        return $this->belongsTo(category::class, 'category_id');
     }
 
 }
