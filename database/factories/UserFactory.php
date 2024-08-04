@@ -21,6 +21,8 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = User::class;
+    
     public function definition(): array
     {
         return [
@@ -28,9 +30,10 @@ class UserFactory extends Factory
             'lastName' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'country_id' => now(),
-            'city_id' => now(),
-            'status' =>'student',
+            'type' => 'student',
+            'phone' => fake()->unique()->name(),
+            'image' => 'student/user/default.png',
+            'status' => 1,
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];

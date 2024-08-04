@@ -34,7 +34,7 @@ class CreateStudentController extends Controller
     use image;
     public function store(StudentRequest $request){
         $newStudent =  $request->only($this->studentRequest); // Take only Request From Protected studentRequest names 
-        $image =  $this->upload($request,'image','student\user'); // Start Upload Image
+        $image =  $this->upload($request,'image','student/user'); // Start Upload Image
         $newStudent['type'] = 'student'; // Type Of User
         $newStudent['image'] =$image; // Image Value From traid Image 
        $user = $this->user->create($newStudent); // Start Create New Studetn
@@ -51,7 +51,7 @@ class CreateStudentController extends Controller
         // Update Image
         if ( !empty($user) ) {
             $this->deleteImage($user->image);
-            $image =  $this->upload($request,'image','student\user'); // Start Upload Image
+            $image =  $this->upload($request,'image','student/user'); // Start Upload Image
             $student['image'] =$image; // Image Value From traid Image 
             $user->update($student); // Start Create New Studetn
             return response()->json(['success'=>'Student Updated Successfully'],200); 

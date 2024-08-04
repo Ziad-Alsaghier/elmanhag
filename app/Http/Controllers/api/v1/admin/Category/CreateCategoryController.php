@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class CreateCategoryController extends Controller
 {
-    //
+
+    public function create( CategoryRequest $req ){
+
+    }
 }
