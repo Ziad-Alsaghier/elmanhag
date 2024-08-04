@@ -60,5 +60,22 @@ class CreateStudentController extends Controller
             return response()->json(['faild'=>'Student Is not Found'],400); 
         }
     }
+
+    public function delete( $id ){
+        // Get User Data
+        $user = User::where('id', $id)
+        ->where('type', 'student')
+        ->first();
+
+        // Remove User
+        if ( !empty($user) ) {
+            $this->deleteImage($user->image);
+            $user->delete();
+            return response()->json(['success'=>'Student Deleted Successfully'],200); 
+        }
+        else{
+            return response()->json(['faild'=>'Student Is not Found'],400); 
+        }
+    }
    
 }

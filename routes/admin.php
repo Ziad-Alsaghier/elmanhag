@@ -17,5 +17,6 @@ Route::prefix('student')->middleware(['auth:sanctum'])->group(function () {
     Route::controller(CreateStudentController::class)->group(function () {
         Route::post('/add', 'store')->name('student.add');
         Route::post('/update/{id}', 'modify')->name('student.modify');
+        Route::get('/delete/{id}', 'delete')->name('student.delete');
     });
 });
