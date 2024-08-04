@@ -3,16 +3,30 @@
 namespace App\trait;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+
 trait image
 {
     // This Trait Aboute Image
 
     public function upload(Request $request,$fileName = 'image',$directory){
-    if($request->has($fileName)){// if Request has a Image
-        $uploadImage = new request();
-        $imagePath = $request->file($fileName)->store($directory,'public'); // Take Image from Request And Save inStorage;
-        return $imagePath;
+        if($request->has($fileName)){// if Request has a Image
+            $uploadImage = new request();
+            $imagePath = $request->file($fileName)->store($directory,'public'); // Take Image from Request And Save inStorage;
+            return $imagePath;
+        }
+        return Null;
     }
-    return Null;
+    
+    public function deleteImage($imagePath){
+        // Check if the file exists
+        if (Storage::exists($imagePath)) {
+            // Delete the file
+            Storage::delete($imagePath);
+            return true;
+        } else {
+            return false;
+        }
     }
+    
 }

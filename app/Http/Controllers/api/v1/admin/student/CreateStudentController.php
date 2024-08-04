@@ -34,7 +34,7 @@ class CreateStudentController extends Controller
     use image;
     public function store(StudentRequest $request){
         $newStudent =  $request->only($this->studentRequest); // Take only Request From Protected studentRequest names 
-        $image =  $this->upload($request,'image','admin/student'); // Start Upload Image
+        $image =  $this->upload($request,'image','student'); // Start Upload Image
         $newStudent['type'] = 'student'; // Type Of User
         $newStudent['image'] =$image; // Image Value From traid Image 
        $user = $this->user->create($newStudent); // Start Create New Studetn
@@ -42,11 +42,23 @@ class CreateStudentController extends Controller
     }
     
     public function modify(UpdateStudentRequest $request, $id){
-        $student =  $request->only($this->studentRequest); // Take only Request From Protected studentRequest names 
-        $image =  $this->upload($request,'image','admin/student'); // Start Upload Image
-        $student['image'] =$image; // Image Value From traid Image 
-        User::where('id', $id)->update($student); // Start Create New Studetn
-        return response()->json(['success'=>'Student Updated Successfully'],200); 
+        // Take only Request From Protected studentRequest names 
+        $student =  $request->only($this->studentRequest); 
+        // Get User Data
+        $user = User::where('id', $id)
+        ->where('type', 'student')
+        ->first();
+        // Update Image
+        if ( !empty($user) ) {
+            $this->deleteImage($user->image);
+            $image =  $this->upload($request,'image','admin/student'); // Start Upload Image
+            $student['image'] =$image; // Image Value From traid Image 
+            $user->update($student); // Start Create New Studetn
+            return response()->json(['success'=>'Student Updated Successfully'],200); 
+        }
+        else{
+            return response()->json(['faild'=>'Student Is not Found'],400); 
+        }
     }
    
 }

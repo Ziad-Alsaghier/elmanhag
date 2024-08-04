@@ -29,12 +29,12 @@ class UpdateStudentRequest extends FormRequest
             'email'=>['required'],
             'parent_name'=>['required'],
             'parent_phone'=>['required'],
-            'category_id'=>['required'],
+            'category_id'=>['sometimes', 'required'],
             'language'=>['required'],
             'password'=>['required'],
             'conf_password'=>['required', 'same:password'],
-            'country_id'=>['required'],
-            'city_id'=>['required'],
+            'country_id'=>['sometimes', 'required'],
+            'city_id'=>['sometimes', 'required'],
         ];
     }
 }
