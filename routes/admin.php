@@ -6,6 +6,7 @@ use App\Http\Controllers\api\v1\admin\student\CreateStudentController;
 use App\Http\Controllers\api\v1\admin\student\StudentsDataController;
 
 use App\Http\Controllers\api\v1\admin\Category\CategoryController;
+use App\Http\Controllers\api\v1\admin\Category\CreateCategoryController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('category')->group(function () {
         Route::controller(CategoryController::class)->group(function(){
             Route::get('/', 'show')->name('category.show');
+        });
+        Route::controller(CreateCategoryController::class)->group(function(){
+            Route::post('/add', 'create')->name('category.add');
         });
     });
 });
