@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         // This Seeder About Data Users Admin or Student
 
         User::factory()
-            ->count(10)
+            ->count(20)
             ->create();
     }
 }
