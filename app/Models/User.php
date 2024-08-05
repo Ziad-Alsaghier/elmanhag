@@ -38,6 +38,7 @@ class User extends Authenticatable
         'remember_token',
         'parent_name',
         'parent_phone',
+        'parent_kinship',
         'category_id',
         'language',
         'image',

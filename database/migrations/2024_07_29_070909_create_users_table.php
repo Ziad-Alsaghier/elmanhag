@@ -22,6 +22,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('parent_name')->nullable();
             $table->string('parent_phone')->nullable();
+            $table->string('parent_kinship')->nullable();
             $table->boolean('language')->nullable();
             $table->string('password');
             $table->foreignId('category_id')->nullable()->constrained('categories')->onUpdate('cascade')->onDelete('cascade');
