@@ -22,6 +22,7 @@ class subject extends Model
         'url',
         'description',
         'status',
+        'semester',
         'expired_date' ,
     ];
 

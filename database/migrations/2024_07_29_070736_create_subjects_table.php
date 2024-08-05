@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->string('description')->nullable();
             $table->boolean('status')->default(1);
+            $table->enum('semester', ['first', 'second']);
             $table->date('expired_date')->nullable();
             $table->timestamps();
         });
