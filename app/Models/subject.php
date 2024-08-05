@@ -16,7 +16,12 @@ class subject extends Model
         'price' ,
         'discount' ,
         'category_id' ,
-        'discount_type' ,
+        'demo_video',
+        'cover_photo',
+        'thumbnail',
+        'url',
+        'description',
+        'status',
         'expired_date' ,
     ];
 

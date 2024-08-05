@@ -17,7 +17,12 @@ return new class extends Migration
             $table->float('price');
             $table->float('discount')->default(0);
             $table->foreignId('category_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->enum('discount_type', ['precentage', 'value']);
+            $table->string('demo_video')->nullable();
+            $table->string('cover_photo')->nullable();
+            $table->string('thumbnail')->nullable();
+            $table->string('url')->nullable();
+            $table->string('description')->nullable();
+            $table->boolean('status')->default(1);
             $table->date('expired_date')->nullable();
             $table->timestamps();
         });
