@@ -14,6 +14,8 @@ use App\Models\category;
 class CreateCategoryController extends Controller
 {
 
+    use image;
+    use translaion;
     protected $categoryRequest = [
         'name',
         'ar_name',
@@ -21,12 +23,10 @@ class CreateCategoryController extends Controller
         'category_id',
         'status',
     ];
-    use image;
-    use translaion;
 
     public function create( CategoryRequest $request ){
         $data = $request->only($this->categoryRequest); // Get Request
-        $image =  $this->upload($request,'image','admin/categories/thumbnail'); // Upload Thumbnail
+        $image =  $this->upload($request,'thumbnail','admin/categories/thumbnail'); // Upload Thumbnail
         $data['thumbnail'] = $image;
         $this->translate($data['name'], $data['ar_name']);
         category::create($data);
@@ -35,4 +35,32 @@ class CreateCategoryController extends Controller
             200
         ]);
     }
+
+    public function modify( CategoryRequest $request, $id ){
+        $data = $request->only($this->categoryRequest); // Get Request
+        $category = category::where('id', $id)
+        ->first(); //Get Category
+        $this->deleteImage($category->thumbnail); // Delete old Thumbnail
+        $image =  $this->upload($request,'thumbnail','admin/categories/thumbnail'); // Upload Thumbnail
+        $data['thumbnail'] = $image;
+        $this->translate($data['name'], $data['ar_name']); // Translate Item
+        $category->update($data); // Update Category
+        return response()->json([
+            'success' => 'You Updated Success',
+            200
+        ]);
+    }
+
+    public function delete( $id ){
+        $category = category::where('id', $id)
+        ->first(); //Get Category
+        $this->deleteImage($category->thumbnail); // Delete old Thumbnail
+        $category->delete(); // Update Category
+        return response()->json([
+            'success' => 'You Deleted Success',
+            200
+        ]);
+    }
+
+    
 }

@@ -33,6 +33,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         });
         Route::controller(CreateCategoryController::class)->group(function(){
             Route::post('/add', 'create')->name('category.add');
+            Route::post('/update/{id}', 'modify')->name('category.update');
+            Route::get('/delete/{id}', 'delete')->name('category.delete');
         });
     });
 });
