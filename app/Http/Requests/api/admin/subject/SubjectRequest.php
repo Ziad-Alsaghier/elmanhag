@@ -28,6 +28,8 @@ class SubjectRequest extends FormRequest
             'expired_date' => ['required'],
             'semester' => ['required'],
             'status' => ['required'],
+            'expired_date' => ['date'],
+            'semester' => ['in:first,second']
         ];
     }
 }
