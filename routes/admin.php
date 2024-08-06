@@ -20,7 +20,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Start Module Student Sign UP
     Route::prefix('student')->group(function () {
         Route::controller(StudentsDataController::class)->group(function () {
-            Route::get('/', 'show')->name('student.show');
+            Route::any('/', 'show')->name('student.show');
         });
         Route::controller(CreateStudentController::class)->group(function () {
             Route::post('/add', 'store')->name('student.add');
