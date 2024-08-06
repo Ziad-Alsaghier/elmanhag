@@ -5,6 +5,8 @@ namespace App\Http\Controllers\api\v1\admin\student;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\country;
+use App\Models\city;
 
 class StudentsDataController extends Controller
 {
@@ -16,6 +18,8 @@ class StudentsDataController extends Controller
         ->with('country')
         ->with('city')
         ->get();
+        $countries = country::get();
+        $cities = city::get();
         $total_students = count($students);
         $banned_students = count($students->where('status', 0));
         $paid_students = User::where('type', 'student')
@@ -31,6 +35,8 @@ class StudentsDataController extends Controller
             'banned_students' => $banned_students,
             'paid_students' => $paid_students,
             'free_students' => $free_students,
+            'countries' => $countries,
+            'cities' => $cities,
         ]);
     }
 }
