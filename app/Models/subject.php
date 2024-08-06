@@ -17,7 +17,6 @@ class subject extends Model
     protected $fillable = [
         'name' ,
         'price' ,
-        'discount' ,
         'category_id' ,
         'demo_video',
         'cover_photo',
