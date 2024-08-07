@@ -13,11 +13,12 @@ use App\Http\Controllers\api\v1\admin\Subject\CreateSubjectController;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CorsMiddleware;
+use App\Http\Middleware\AdminMiddleware;
 
 
 
 
-Route::middleware(['auth:sanctum', CorsMiddleware::class])->group(function () {
+Route::middleware(['auth:sanctum', CorsMiddleware::class, AdminMiddleware::class])->group(function () {
     // Start Module Student Sign UP
     Route::prefix('student')->group(function () {
         Route::controller(StudentsDataController::class)->group(function () {
