@@ -20,7 +20,7 @@ class CityFactory extends Factory
 
               'name' => fake()->name(),
               'country_id' =>'1',
-              'status' => '1',
+              'status' => $this->faker()->randomElement(['1','0']),
         ];
     }
 }

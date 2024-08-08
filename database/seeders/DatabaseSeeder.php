@@ -24,7 +24,11 @@ class DatabaseSeeder extends Seeder
             ->create();
         city::factory()
             ->count(5)
-            ->create();
+            ->create(
+                [
+                    'country_id'=>city::factory(),
+                ]
+            );
         User::factory()
             ->count(20)
             ->create(
