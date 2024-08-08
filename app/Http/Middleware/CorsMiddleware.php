@@ -32,9 +32,9 @@ class CorsMiddleware
         header('Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Authorization, Origin');
 
         // If the request is an OPTIONS request, return a response with the CORS headers
-        if ($request->getMethod() === 'OPTIONS') {
-            return response()->json([], 200);
-        }
+        // if ($request->getMethod() === 'OPTIONS') {
+        //     return response()->json([], 200);
+        // }
 
         return $next($request);
     }
