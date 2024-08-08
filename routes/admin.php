@@ -8,12 +8,17 @@ use App\Http\Controllers\api\v1\admin\student\StudentsDataController;
 use App\Http\Controllers\api\v1\admin\Category\CategoryController;
 use App\Http\Controllers\api\v1\admin\Category\CreateCategoryController;
 
+use App\Http\Controllers\api\v1\admin\Subject\SubjectController;
+use App\Http\Controllers\api\v1\admin\Subject\CreateSubjectController;
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CorsMiddleware;
+use App\Http\Middleware\AdminMiddleware;
 
 
 
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum', CorsMiddleware::class, AdminMiddleware::class])->group(function () {
     // Start Module Student Sign UP
     Route::prefix('student')->group(function () {
         Route::controller(StudentsDataController::class)->group(function () {
@@ -35,6 +40,18 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::post('/add', 'create')->name('category.add');
             Route::post('/update/{id}', 'modify')->name('category.update');
             Route::get('/delete/{id}', 'delete')->name('category.delete');
+        });
+    });
+
+    // Start Subject Module
+    Route::prefix('subject')->group(function () {
+        Route::controller(SubjectController::class)->group(function(){
+            Route::get('/', 'show')->name('subject.show');
+        });
+        Route::controller(CreateSubjectController::class)->group(function(){
+            Route::post('/add', 'create')->name('subject.add');
+            Route::post('/update/{id}', 'modify')->name('subject.update');
+            Route::get('/delete/{id}', 'delete')->name('subject.delete');
         });
     });
 });

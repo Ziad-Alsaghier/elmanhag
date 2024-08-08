@@ -4,9 +4,9 @@ namespace App\Http\Controllers\api\v1\admin\Category;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\trait\image;
 use App\Http\Requests\api\admin\category\CategoryRequest;
 use Illuminate\Support\Facades\File;
+use App\trait\image;
 use App\trait\translaion;
 
 use App\Models\category;

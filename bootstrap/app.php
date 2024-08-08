@@ -25,9 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
        [
         'student' => $middleware->append(StudentMiddleware::class),
-        'admin' => [
-                    'student'=>$middleware->append(AdminMiddleware::class)
-                    ]
+        'admin' => $middleware->append(AdminMiddleware::class),
         ];
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\lesson;
+
 class chapter extends Model
 {
     use HasFactory;
@@ -14,4 +16,9 @@ class chapter extends Model
         'subject_id' ,
         'status' ,
     ];
+
+    public function lessons(){
+        return $this->hasMany(lesson::class);
+    }
+
 }
